@@ -7,6 +7,8 @@ android {
     namespace = "com.example.musicplayer"
     compileSdk = 34
 
+    viewBinding { enable=true }
+
     defaultConfig {
         applicationId = "com.example.musicplayer"
         minSdk = 24
@@ -36,7 +38,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,4 +46,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("de.hdodenhof:circleimageview:3.1.0") //Circle ImageView
 }
