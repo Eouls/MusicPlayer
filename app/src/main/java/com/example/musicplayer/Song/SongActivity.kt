@@ -20,12 +20,12 @@ class SongActivity: AppCompatActivity() {
         binding.songDownIb.setOnClickListener {
             finish()
         }
-//        binding.songPlayIv.setOnClickListener {
-//            setPlayerStatus(true)
-//        }
-//        binding.songPauseIv.setOnClickListener {
-//            setPlayerStatus(false)
-//        }
+        binding.songPlayIv.setOnClickListener {
+            setPlayerStatus(true)
+        }
+        binding.songPauseIv.setOnClickListener {
+            setPlayerStatus(false)
+        }
 //        binding.songNextIv.setOnClickListener {
 //            moveSong(+1)
 //        }
@@ -40,20 +40,20 @@ class SongActivity: AppCompatActivity() {
 //        }
     }
 
-//    private fun setPlayerStatus(isPlaying : Boolean){
+    private fun setPlayerStatus(isPlaying : Boolean){
 //        songs[nowPos].isPlaying = isPlaying
 //        timer.isPlaying = isPlaying
-//
-//        if(isPlaying) { // 재생중
-//            binding.songPlayIv.visibility = View.GONE
-//            binding.songPauseIv.visibility = View.VISIBLE
+
+        if(isPlaying) { // 재생중
+            binding.songPlayIv.visibility = View.GONE
+            binding.songPauseIv.visibility = View.VISIBLE
 //            mediaPlayer?.start()
-//        } else { // 일시정지
-//            binding.songPlayIv.visibility = View.VISIBLE
-//            binding.songPauseIv.visibility = View.GONE
+        } else { // 일시정지
+            binding.songPlayIv.visibility = View.VISIBLE
+            binding.songPauseIv.visibility = View.GONE
 //            if (mediaPlayer?.isPlaying == true) { // 재생 중이 아닐 때에 pause를 하면 에러가 나기 때문에 이를 방지
 //                mediaPlayer?.pause()
 //            }
-//        }
-//    }
+        }
+    }
 }
