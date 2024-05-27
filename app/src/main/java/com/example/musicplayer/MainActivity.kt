@@ -5,7 +5,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.musicplayer.Blog.BlogFragment
 import com.example.musicplayer.Home.HomeFragment
+import com.example.musicplayer.Profile.ProfileFragment
+import com.example.musicplayer.SavedSong.SavedSongFragment
 import com.example.musicplayer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
 
                 // 바텀네비 어떻게 하더라
-                
+
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, HomeFragment())
@@ -37,19 +40,19 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.blogFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, blogFragment())
+                        .replace(R.id.main_frm, BlogFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
-                R.id.savedsongFragment -> {
+                R.id.savedSongFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, savedsongFragment())
+                        .replace(R.id.main_frm, SavedSongFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
                 R.id.profileFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, profileFragment())
+                        .replace(R.id.main_frm, ProfileFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }

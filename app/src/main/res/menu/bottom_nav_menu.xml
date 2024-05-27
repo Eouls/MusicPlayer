@@ -15,7 +15,7 @@
         app:showAsAction="always"
         android:title="블로그" />
     <item
-        android:id="@+id/savedsongFragment"
+        android:id="@+id/savedSongFragment"
         android:icon="@drawable/btn_editbar_mylist"
         app:showAsAction="always"
         android:title="저장한 곡" />
