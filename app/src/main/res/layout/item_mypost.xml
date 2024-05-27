@@ -63,4 +63,14 @@
         app:layout_constraintBottom_toBottomOf="@id/item_mypost_img_cv"
         app:layout_constraintStart_toEndOf="@id/item_mypost_img_cv"/>
 
+    <ImageView
+        android:id="@+id/item_post_more_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/btn_post_more"
+        android:layout_marginRight="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
