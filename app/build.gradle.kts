@@ -8,7 +8,9 @@ android {
     namespace = "com.example.musicplayer"
     compileSdk = 34
 
-    viewBinding { enable=true }
+    viewBinding {
+        enable = true
+    }
 
     defaultConfig {
         applicationId = "com.example.musicplayer"
@@ -49,6 +51,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("de.hdodenhof:circleimageview:3.1.0") //Circle ImageView
+
+    implementation("com.google.code.gson:gson:2.8.7") // gson
 
     // Room DB
     val room_version = "2.6.1"

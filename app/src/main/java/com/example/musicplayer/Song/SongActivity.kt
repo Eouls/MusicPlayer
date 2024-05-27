@@ -1,13 +1,22 @@
 package com.example.musicplayer.Song
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.databinding.ActivitySongBinding
+import com.google.gson.Gson
+import java.util.Timer
 
 class SongActivity: AppCompatActivity() {
     lateinit var binding: ActivitySongBinding
+    lateinit var timer: Timer
+    private var mediaPlayer: MediaPlayer? = null // 추후에 미디어 플레이어 해제를 위해 nullable로 선언
+    private var gson: Gson = Gson()
 
+    val songs = arrayListOf<Song>()
+    lateinit var songDB: SongDatabase
+    var nowPos = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
@@ -56,4 +65,6 @@ class SongActivity: AppCompatActivity() {
 //            }
         }
     }
+
+
 }

@@ -26,15 +26,17 @@
         app:layout_constraintTop_toTopOf="@id/song_down_ib"
         app:layout_constraintBottom_toBottomOf="@id/song_down_ib"/>
 
-<!--    <ImageView-->
-<!--        android:id="@+id/song_like_on_iv"-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:src="@drawable/ic_my_like_on"-->
-<!--        android:layout_marginStart="25dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@id/song_down_ib"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/song_down_ib"/>-->
+    <ImageView
+        android:id="@+id/song_like_on_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_my_like_on"
+        app:tint="@color/mulog"
+        android:layout_marginStart="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/song_down_ib"
+        app:layout_constraintBottom_toBottomOf="@id/song_down_ib"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/song_music_title_tv"
