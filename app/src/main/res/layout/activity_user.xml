@@ -61,7 +61,7 @@
             android:layout_marginLeft="20dp"/>
 
         <TextView
-            android:id="@+id/user_ment"
+            android:id="@+id/user_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="어쩌고저쩌고\n어쩌고저쩌고"
@@ -74,6 +74,7 @@
             android:maxLines="2"/>
 
         <ImageView
+            android:id="@+id/setting_btn"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_bottom_setting_btn"
@@ -83,5 +84,25 @@
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전체글"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-159dp"
+        tools:listitem="@layout/item_mypost"/>
 
 </LinearLayout>
