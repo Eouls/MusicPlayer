@@ -23,10 +23,10 @@ class ProfileFragment: Fragment() {
 
         postDatas.apply {
             add(Post(R.drawable.img_post_1, "제목1", "내용1", "2024.05.28"))
-            add(Post(R.drawable.img_post_1, "제목2", "내용2\n^_^", "2024.05.27"))
-            add(Post(R.drawable.img_post_1, "제목3", "내용3\nㅇㅅㅇ", "2024.05.26"))
-            add(Post(R.drawable.img_post_1, "제목4", "내용4\n=ㅅ=", "2024.05.25"))
-            add(Post(R.drawable.img_post_1, "제목5", "내용5\nㅍ_ㅍ","2024.05.24"))
+            add(Post(R.drawable.img_post_2, "제목2", "내용2\n김기찬 군은 돼지일까요 아닐까요 ?", "2024.05.27"))
+            add(Post(R.drawable.img_post_3, "제목3", "내용3\n정답은요...", "2024.05.26"))
+            add(Post(R.drawable.img_post_4, "제목4", "내용4\n돼지였습니다ㅡ!!", "2024.05.25"))
+            add(Post(R.drawable.img_post_5, "제목5", "내용5\n^0^","2024.05.24"))
         }
 
 
