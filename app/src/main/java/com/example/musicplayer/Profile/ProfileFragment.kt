@@ -20,6 +20,7 @@ class ProfileFragment: Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+
         postDatas.apply {
             add(Post(R.drawable.img_post_1, "제목1", "내용1"))
             add(Post(R.drawable.img_post_1, "제목2", "내용2\n^_^"))
