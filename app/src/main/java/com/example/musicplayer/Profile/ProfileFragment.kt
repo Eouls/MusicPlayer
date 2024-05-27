@@ -1,11 +1,13 @@
 package com.example.musicplayer.Profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.musicplayer.MainActivity
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentProfileBinding
 
@@ -29,7 +31,6 @@ class ProfileFragment: Fragment() {
             add(Post(R.drawable.img_post_5, "제목5", "내용5\n^0^","2024.05.24"))
         }
 
-
         val savedSongRVAdapter = ProfileRVAdapter(postDatas)
         binding.profilePostRv.adapter = savedSongRVAdapter
         binding.profilePostRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -39,6 +40,11 @@ class ProfileFragment: Fragment() {
                 savedSongRVAdapter.removeItem(position)
             }
         })
+
+
+        binding.settingBtn.setOnClickListener {
+            startActivity(Intent(requireActivity(), EditProfileActivity::class.java))
+        }
 
         return binding.root
     }

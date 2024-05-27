@@ -13,9 +13,11 @@
         android:theme="@style/Theme.MusicPlayer"
         tools:targetApi="31">
         <activity
-            android:name=".UserActivity"
-            android:exported="false" />
-        <activity android:name=".Song.SongActivity"/>
+            android:name=".Profile.EditProfileActivity"
+            android:exported="true" />
+
+        <activity android:name=".Song.SongActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
