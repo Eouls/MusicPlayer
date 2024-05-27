@@ -1,5 +1,6 @@
 package com.example.musicplayer
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import com.example.musicplayer.Blog.BlogFragment
 import com.example.musicplayer.Home.HomeFragment
 import com.example.musicplayer.Profile.ProfileFragment
 import com.example.musicplayer.SavedSong.SavedSongFragment
+import com.example.musicplayer.Song.SongActivity
 import com.example.musicplayer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +20,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigation()
+
+        binding.mainPlayerCl.setOnClickListener {
+            val intent = Intent(this, SongActivity::class.java)
+            startActivity(intent)
+        }
     }
 
+
+    // 바텀 네비게이션 뷰
     private fun initBottomNavigation(){
 
         supportFragmentManager.beginTransaction()
