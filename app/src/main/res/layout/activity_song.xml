@@ -17,18 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/song_more_ib"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/transparent"
-        android:src="@drawable/btn_player_more"
-        android:scaleType="fitXY"
-        app:layout_constraintTop_toBottomOf="@id/song_down_ib"
-        app:layout_constraintEnd_toEndOf="@id/song_down_ib"
-        app:layout_constraintStart_toStartOf="@id/song_down_ib"/>
-
-    <ImageView
         android:id="@+id/song_like_off_iv"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -56,10 +44,10 @@
         android:textStyle="bold"
         android:textSize="17sp"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/song_more_ib" />
+        app:layout_constraintTop_toBottomOf="@id/song_down_ib" />
 
     <TextView
         android:id="@+id/song_music_singer_tv"
