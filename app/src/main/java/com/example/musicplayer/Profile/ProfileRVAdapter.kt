@@ -54,6 +54,7 @@ class ProfileRVAdapter (private val postList: ArrayList<Post>) :
             binding.itemMypostImgIv.setImageResource(post.postImg!!)
             binding.itemMypostTitleTv.text = post.title
             binding.itemMypostContentTv.text = post.content
+            binding.itemMypostDateTv.text = post.date
         }
     }
 }
