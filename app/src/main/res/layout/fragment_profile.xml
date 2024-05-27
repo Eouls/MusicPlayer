@@ -62,7 +62,7 @@
             android:id="@+id/user_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="어쩌고저쩌고\n어쩌고저쩌고"
+            android:text="자기소개\n어쩌고저쩌고"
             android:textColor="@color/white"
             android:textSize="15dp"
             android:layout_toRightOf="@id/profile_picture"
@@ -76,9 +76,9 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_bottom_setting_btn"
-            android:layout_gravity="right|top"
+            android:layout_gravity="bottom"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
@@ -100,6 +100,6 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_mypost"/>
+        tools:listitem="@layout/item_mypost" />
 
 </LinearLayout>
