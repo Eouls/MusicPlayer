@@ -11,6 +11,7 @@ import com.example.musicplayer.databinding.ActivitySongBinding
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Timer
+import kotlin.math.log
 
 class SongActivity: AppCompatActivity() {
     lateinit var binding: ActivitySongBinding
@@ -73,6 +74,8 @@ class SongActivity: AppCompatActivity() {
         val songId = spf.getInt("songId", 0)
 
         nowPos = getPlayingSongPosition(songId)
+        songs[nowPos].second = spf.getInt("songSecond", 0) // 저장된 재생 위치를 받아옵니다.
+
 
         Log.d("now Song ID", songs[nowPos].id.toString())
 
@@ -141,7 +144,8 @@ class SongActivity: AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     timer.interrupt()
-                    val newSecond = (progress * song.playTime) / 100
+//                    val newSecond = (progress * song.playTime) / 100
+                    val newSecond = progress / 1000
                     mediaPlayer?.seekTo(newSecond * 1000)
                     binding.songStartTv.text = String.format("%02d:%02d", newSecond / 60, newSecond % 60)
                     songs[nowPos].second = newSecond
@@ -192,7 +196,9 @@ class SongActivity: AppCompatActivity() {
 
     private fun setPlayerStatus(isPlaying : Boolean){
         songs[nowPos].isPlaying = isPlaying
-        timer.isPlaying = isPlaying
+        if (::timer.isInitialized) {
+            timer.isPlaying = isPlaying
+        }
 
         if(isPlaying) { // 재생중
             binding.songPlayIv.visibility = View.GONE
@@ -251,7 +257,8 @@ class SongActivity: AppCompatActivity() {
 
     override fun onPause() { // 사용자가 포커스를 잃었을 때 음악 중지
         super.onPause()
-        songs[nowPos].second = ((binding.songSeekbarSb.progress * songs[nowPos].playTime) / 100) / 1000
+//        songs[nowPos].second = ((binding.songSeekbarSb.progress * songs[nowPos].playTime) / 100) / 1000
+        songs[nowPos].second = binding.songSeekbarSb.progress / 1000
         songs[nowPos].isPlaying = false
         setPlayerStatus(false) // 음악을 중지하기 위해 false 값
 
@@ -263,5 +270,18 @@ class SongActivity: AppCompatActivity() {
         Log.d("songSecond", songs[nowPos].second.toString())
 
         editor.apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = sharedPreferences.getInt("songId", 0)
+        songs[nowPos].second = sharedPreferences.getInt("songSecond", 0)
+        Log.d("resume", songs[nowPos].second.toString())
+        nowPos = getPlayingSongPosition(songId)
+
+        setPlayer(songs[nowPos])
+        setPlayerStatus(true)
     }
 }

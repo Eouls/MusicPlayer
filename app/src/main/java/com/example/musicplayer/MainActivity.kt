@@ -124,14 +124,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainSeekbarSb.max = song.playTime * 1000
 
-//        while (mediaPlayer?.isPlaying == true) {
-//            runOnUiThread {
-//                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
-//            }
-//        }
-
-//        binding.mainSeekbarSb.progress = (songs[nowPos].second * 1000) / song.playTime
-
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
         mediaPlayer?.seekTo(songs[nowPos].second * 1000)
@@ -187,6 +179,8 @@ class MainActivity : AppCompatActivity() {
 
         nowPos = getPlayingSongPosition(songId)
         setMiniPlayer(songs[nowPos])
+        setPlayerStatus(true)
+
     }
 
     override fun onPause() {
