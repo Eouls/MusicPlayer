@@ -3,6 +3,8 @@ package com.example.musicplayer
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
@@ -30,6 +32,15 @@ class MainActivity : AppCompatActivity() {
     var nowPos = 0
 
     private var mediaPlayer: MediaPlayer? = null
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateSeekBarTask = object : Runnable {
+        override fun run() {
+            if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
+                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
+                handler.postDelayed(this, 1000)
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -69,21 +80,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPlayerStatus(isPlaying : Boolean){
-
-        if(isPlaying) {
+    private fun setPlayerStatus(isPlaying: Boolean) {
+        if (isPlaying) {
             binding.mainMiniplayBtn.visibility = View.GONE
             binding.mainPauseBtn.visibility = View.VISIBLE
             mediaPlayer?.start()
+            handler.post(updateSeekBarTask)
         } else {
             binding.mainMiniplayBtn.visibility = View.VISIBLE
             binding.mainPauseBtn.visibility = View.GONE
             if (mediaPlayer?.isPlaying == true) {
                 mediaPlayer?.pause()
             }
+            handler.removeCallbacks(updateSeekBarTask)
         }
     }
-
     private fun moveSong(direct: Int) {
         if (nowPos + direct < 0) {
             Toast.makeText(this, "first song", Toast.LENGTH_SHORT).show()
@@ -113,11 +124,12 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainSeekbarSb.max = song.playTime * 1000
 
-        while (mediaPlayer?.isPlaying == true) {
-            runOnUiThread {
-                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
-            }
-        }
+//        while (mediaPlayer?.isPlaying == true) {
+//            runOnUiThread {
+//                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
+//            }
+//        }
+
 //        binding.mainSeekbarSb.progress = (songs[nowPos].second * 1000) / song.playTime
 
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
@@ -127,9 +139,8 @@ class MainActivity : AppCompatActivity() {
         binding.mainSeekbarSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    val newSecond = progress / 1000
-                    mediaPlayer?.seekTo(newSecond * 1000)
-                    songs[nowPos].second = newSecond
+                    mediaPlayer?.seekTo(progress)
+                    songs[nowPos].second = progress / 1000
                 }
             }
 
@@ -181,7 +192,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         Log.d("pause", "pause 발생")
-        songs[nowPos].second = ((binding.mainSeekbarSb.progress * songs[nowPos].playTime) / 100) / 1000
+        songs[nowPos].second = binding.mainSeekbarSb.progress / 1000
         Log.d("mainpauseprogress", binding.mainSeekbarSb.progress.toString())
 
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
