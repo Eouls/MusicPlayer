@@ -11,17 +11,17 @@
         tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/blogFragment"
-        android:icon="@drawable/ic_bottom_blog_no_select"
+        android:icon="@drawable/ic_bottom_look_no_select"
         app:showAsAction="always"
-        android:title="피드" />
+        android:title="블로그" />
     <item
-        android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_bottom_library_no_select"
+        android:id="@+id/savedsongFragment"
+        android:icon="@drawable/btn_editbar_mylist"
         app:showAsAction="always"
-        android:title="보관함" />
+        android:title="저장한 곡" />
     <item
-        android:id="@+id/lockerFragment"
-        android:icon="@drawable/ic_bottom_user_no_select"
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_bottom_my_no_select"
         app:showAsAction="always"
         android:title="프로필" />
 
