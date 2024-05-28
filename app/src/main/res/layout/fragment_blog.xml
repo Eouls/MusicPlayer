@@ -42,6 +42,6 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_post" />
+        tools:listitem="@layout/item_blog_post" />
 
 </LinearLayout>

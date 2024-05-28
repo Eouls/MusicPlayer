@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
-import com.example.musicplayer.databinding.ItemPostBinding
+import com.example.musicplayer.databinding.ItemBlogPostBinding
 import com.example.musicplayer.post.Post
 
 class BlogRVAdapter (private val postList: ArrayList<Post>) :
@@ -34,8 +34,8 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
         viewGroup: ViewGroup,
         viewType: Int
     ): BlogRVAdapter.ViewHolder {
-        val binding: ItemPostBinding =
-            ItemPostBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        val binding: ItemBlogPostBinding =
+            ItemBlogPostBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
@@ -52,7 +52,7 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
     override fun getItemCount(): Int = postList.size
 
     // 뷰 홀더
-    inner class ViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemBlogPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
             // binding.itemPostImgIv.setImageResource(post.postImg!!)
             binding.itemPostTitleTv.text = post.title

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.post.Post
-import com.example.musicplayer.databinding.ItemMypostBinding
+import com.example.musicplayer.databinding.ItemProfilePostBinding
 
 class ProfileRVAdapter (private var posts: ArrayList<Post>) :
     RecyclerView.Adapter<ProfileRVAdapter.ViewHolder>() {
@@ -34,8 +34,8 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
         viewGroup: ViewGroup,
         viewType: Int
     ): ProfileRVAdapter.ViewHolder {
-        val binding: ItemMypostBinding =
-            ItemMypostBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        val binding: ItemProfilePostBinding =
+            ItemProfilePostBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
@@ -52,7 +52,7 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
     override fun getItemCount(): Int = posts.size
 
     // 뷰 홀더
-    inner class ViewHolder(val binding: ItemMypostBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemProfilePostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
             // binding.itemMypostImgIv.setImageResource(post.postImg!!)
             binding.itemMypostTitleTv.text = post.title

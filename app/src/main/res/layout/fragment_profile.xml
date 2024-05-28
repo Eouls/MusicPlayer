@@ -124,7 +124,7 @@
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_mypost" />
+            tools:listitem="@layout/item_profile_post" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
