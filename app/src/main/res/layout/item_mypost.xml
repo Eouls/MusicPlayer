@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="18dp"
+    android:paddingRight="18dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:paddingVertical="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_mypost_img_cv"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,11 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="글 제목"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintTop_toTopOf="@id/item_mypost_img_cv"
         app:layout_constraintStart_toEndOf="@id/item_mypost_img_cv"/>
 
@@ -46,11 +46,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="내용\n내용"
-        android:textSize="15dp"
+        android:textSize="14dp"
         android:maxLines="2"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/item_mypost_title_tv"
+        app:layout_constraintBottom_toTopOf="@id/item_mypost_date_tv"
         app:layout_constraintStart_toEndOf="@id/item_mypost_img_cv"/>
 
     <TextView
@@ -61,7 +61,6 @@
         android:textSize="13dp"
         android:textColor="#AAAAAA"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="@id/item_mypost_img_cv"
         app:layout_constraintStart_toEndOf="@id/item_mypost_img_cv"/>
 
@@ -70,8 +69,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/btn_post_more"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
+        android:paddingRight="-20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

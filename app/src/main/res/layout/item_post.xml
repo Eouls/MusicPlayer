@@ -48,6 +48,7 @@
         android:layout_height="30dp"
         android:src="@drawable/btn_post_more"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="-10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/item_post_user_name_tv"/>
 
