@@ -11,7 +11,6 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.Blog.BlogFragment
-import com.example.musicplayer.Blog.PostActivity
 import com.example.musicplayer.Home.HomeFragment
 import com.example.musicplayer.Profile.ProfileFragment
 import com.example.musicplayer.Locker.LikedSongFragment
@@ -419,21 +418,15 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
 
-                R.id.savedSongFragment -> { // SavedSongFragment 로 전환
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LockerFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-
-                R.id.postActivity -> { // PostActivity 실행
-                    startActivity(Intent(this@MainActivity, PostActivity::class.java))
-                    return@setOnItemSelectedListener true
-                }
-
                 R.id.blogFragment -> { // BlogFragment 로 전환
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, BlogFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.savedSongFragment -> { // SavedSongFragment 로 전환
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_frm, LockerFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }

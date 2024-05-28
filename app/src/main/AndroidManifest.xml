@@ -13,12 +13,11 @@
         android:theme="@style/Theme.MusicPlayer"
         tools:targetApi="31">
         <activity
-            android:name=".Blog.PostActivity"
-            android:exported="false" />
-        <activity
             android:name=".Profile.EditProfileActivity"
             android:exported="true" />
+
         <activity android:name=".Song.SongActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

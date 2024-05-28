@@ -10,20 +10,15 @@
         android:title="홈"
         tools:ignore="AlwaysShowAction" />
     <item
-        android:id="@+id/savedSongFragment"
-        android:icon="@drawable/ic_bottom_library_no_select"
-        app:showAsAction="always"
-        android:title="보관함" />
-    <item
-        android:id="@+id/postActivity"
-        android:icon="@drawable/ic_bottom_add_no_select"
-        app:showAsAction="always"
-        android:title="글 작성"/>
-    <item
         android:id="@+id/blogFragment"
         android:icon="@drawable/ic_bottom_blog_no_select"
         app:showAsAction="always"
         android:title="블로그" />
+    <item
+        android:id="@+id/savedSongFragment"
+        android:icon="@drawable/ic_bottom_library_no_select"
+        app:showAsAction="always"
+        android:title="보관함" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_bottom_user_no_select"

@@ -27,7 +27,6 @@ class EditProfileActivity : AppCompatActivity() {
         binding.userNameEdit.setText(userName)
         binding.userIntroductionEdit.setText(userIntroduction)
 
-        // 뒤로가기 버튼
         binding.profileEditCancelBtn.setOnClickListener {
             finish()
         }
