@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.databinding.ItemMypostBinding
 
-class ProfileRVAdapter (private val postList: ArrayList<Post>) :
+class ProfileRVAdapter (private val myPostList: ArrayList<Post>) :
     RecyclerView.Adapter<ProfileRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스 정의
@@ -22,7 +22,7 @@ class ProfileRVAdapter (private val postList: ArrayList<Post>) :
 
     // 저장된 글 삭제
     fun removeItem(position: Int) {
-        postList.removeAt(position)
+        myPostList.removeAt(position)
         notifyDataSetChanged()
     }
 
@@ -38,15 +38,15 @@ class ProfileRVAdapter (private val postList: ArrayList<Post>) :
     }
 
     override fun onBindViewHolder(holder: ProfileRVAdapter.ViewHolder, position: Int) {
-        holder.bind(postList[position])
-        holder.binding.itemPostMoreIv.setOnClickListener {
+        holder.bind(myPostList[position])
+        holder.binding.itemMypostMoreIv.setOnClickListener {
             mItemClickListener.onRemoveItem(position)
             removeItem(position)
         }
     }
 
     // 데이터 세트 크기 함수
-    override fun getItemCount(): Int = postList.size
+    override fun getItemCount(): Int = myPostList.size
 
     // 뷰 홀더
     inner class ViewHolder(val binding: ItemMypostBinding) : RecyclerView.ViewHolder(binding.root) {

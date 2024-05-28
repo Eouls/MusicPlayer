@@ -22,4 +22,13 @@
 
     <style name="Theme.MusicPlayer" parent="Base.Theme.MusicPlayer" />
 
+    <style name="CollapsedAppBar" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#BF00FF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textColor">#BF00FF</item>
+        <item name="android:textSize">30sp</item>
+    </style>
 </resources>

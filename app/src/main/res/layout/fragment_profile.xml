@@ -7,106 +7,125 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:background="@color/black">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/profile_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:contentScrim="@android:color/white"
+                app:collapsedTitleTextAppearance="@style/CollapsedAppBar"
+                app:expandedTitleTextAppearance="@style/ExpandedAppBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:background="@color/black">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_post_5"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.8"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_picture"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="left|bottom"
+                        android:src="@drawable/img_default_profile"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:id="@+id/blog_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="블로그 이름"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:layout_above="@id/profile_picture"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오늘 0 - 전체 124"
+                        android:textSize="12dp"
+                        android:textColor="@color/white"
+                        android:layout_above="@id/blog_name"
+                        android:layout_marginLeft="22dp"/>
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="닉네임"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@id/profile_picture"
+                        android:layout_alignTop="@id/profile_picture"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"/>
+
+                    <TextView
+                        android:id="@+id/user_introduction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="자기소개\n어쩌고저쩌고"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:layout_toRightOf="@id/profile_picture"
+                        android:layout_below="@id/user_name"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp"
+                        android:maxLines="2"/>
+
+                    <ImageView
+                        android:id="@+id/setting_btn"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_bottom_setting_btn"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/toolbar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    app:layout_collapseMode="pin" />-->
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_post_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_post_5"
-            android:scaleType="centerCrop"
-            android:alpha="0.8"/>
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_mypost" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="left|bottom"
-            android:src="@drawable/img_default_profile"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:id="@+id/blog_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="블로그 이름"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:layout_above="@id/profile_picture"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="오늘 0 - 전체 124"
-            android:textSize="12dp"
-            android:textColor="@color/white"
-            android:layout_above="@id/blog_name"
-            android:layout_marginLeft="22dp"/>
-
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="닉네임"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_toRightOf="@id/profile_picture"
-            android:layout_alignTop="@id/profile_picture"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"/>
-
-        <TextView
-            android:id="@+id/user_introduction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="자기소개\n어쩌고저쩌고"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:layout_toRightOf="@id/profile_picture"
-            android:layout_below="@id/user_name"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="7dp"
-            android:maxLines="2"/>
-
-        <ImageView
-            android:id="@+id/setting_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_bottom_setting_btn"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="40dp"
-            android:layout_alignParentRight="true"/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전체글"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/profile_post_rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_mypost" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

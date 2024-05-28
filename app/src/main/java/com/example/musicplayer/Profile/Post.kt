@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Post(
         var postImg: Int? = null,
         val title : String = "",
+        val name : String = "",
         val content : String = "",
         val date : String = ""
 ){
