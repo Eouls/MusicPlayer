@@ -3,8 +3,10 @@ package com.example.musicplayer.Blog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.Profile.Post
+import com.bumptech.glide.Glide
+import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ItemPostBinding
+import com.example.musicplayer.post.Post
 
 class BlogRVAdapter (private val postList: ArrayList<Post>) :
     RecyclerView.Adapter<BlogRVAdapter.ViewHolder>() {
@@ -52,11 +54,20 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
     // 뷰 홀더
     inner class ViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            binding.itemPostImgIv.setImageResource(post.postImg!!)
+            // binding.itemPostImgIv.setImageResource(post.postImg!!)
             binding.itemPostTitleTv.text = post.title
             binding.itemPostUserNameTv.text = post.name
             binding.itemPostContentTv.text = post.content
             binding.itemPostDateTv.text = post.date
+
+            // 이미지 경로를 통해 이미지 설정
+            post.imagePath?.let { imagePath ->
+                Glide.with(binding.itemPostImgIv.context)
+                    .load(imagePath)
+                    .into(binding.itemPostImgIv)
+            } ?: run {
+                binding.itemPostImgIv.setImageResource(R.drawable.img_post_default) // 기본 이미지 설정
+            }
         }
     }
 }
