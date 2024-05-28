@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.Blog.BlogFragment
 import com.example.musicplayer.Home.HomeFragment
 import com.example.musicplayer.Profile.ProfileFragment
-import com.example.musicplayer.SavedSong.SavedSongFragment
+import com.example.musicplayer.Locker.LikedSongFragment
+import com.example.musicplayer.Locker.LockerFragment
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongActivity
 import com.example.musicplayer.Song.SongDatabase
@@ -425,7 +426,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.savedSongFragment -> { // SavedSongFragment 로 전환
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, SavedSongFragment())
+                        .replace(R.id.main_frm, LockerFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
