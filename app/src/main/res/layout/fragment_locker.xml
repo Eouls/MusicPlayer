@@ -20,7 +20,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/locker_seg_tb"
-        android:layout_width="170dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:tabIndicatorFullWidth="false"
         app:tabSelectedTextColor="@color/mulog"
