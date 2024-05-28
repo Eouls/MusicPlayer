@@ -18,7 +18,8 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Profile.EditProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Song.SongActivity" />
         <activity
             android:name=".MainActivity"

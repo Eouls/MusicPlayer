@@ -101,6 +101,9 @@
         android:textColor="@color/black"
         android:textSize="15dp"
         android:maxLength="20"
+        android:maxLines="1"
+        android:inputType="text"
+        android:scrollHorizontally="false"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
@@ -112,8 +115,6 @@
         android:text="사용자 이름"
         android:textStyle="bold"
         android:textSize="17dp"
-        android:inputType="textMultiLine"
-        android:scrollHorizontally="false"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"/>
 
@@ -124,7 +125,8 @@
         android:textColor="@color/black"
         android:textSize="15dp"
         android:maxLength="20"
-        android:inputType="textMultiLine"
+        android:maxLines="1"
+        android:inputType="text"
         android:scrollHorizontally="false"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

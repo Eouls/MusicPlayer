@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.Profile.ProfileRVAdapter
-import com.example.musicplayer.Profile.UserData
-import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentBlogBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
