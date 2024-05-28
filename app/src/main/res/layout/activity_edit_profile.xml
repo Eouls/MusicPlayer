@@ -6,17 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="4dp">
+
+        <ImageView
+            android:id="@+id/profile_edit_cancel_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/btn_back_black"
+            android:background="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/profile_edit_apply_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="적용"
+            android:textSize="18dp"
+            android:layout_gravity="right"
+            android:background="@color/transparent"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:background="@color/black">
-
-        <ImageView
-            android:id="@+id/profile_cover_edit"
-            android:src="@drawable/btn_edit_img"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_centerInParent="true"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -24,6 +44,13 @@
             android:src="@drawable/img_post_5"
             android:scaleType="centerCrop"
             android:alpha="0.9"/>
+
+        <ImageView
+            android:id="@+id/profile_cover_edit"
+            android:src="@drawable/btn_edit_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_picture_edit"
@@ -107,7 +134,7 @@
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/user_introduction"
+        android:id="@+id/user_introduction_edit"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textColor="@color/black"

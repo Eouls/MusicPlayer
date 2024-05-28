@@ -1,10 +1,12 @@
 package com.example.musicplayer.Profile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,6 +17,7 @@ import com.example.musicplayer.databinding.FragmentProfileBinding
 class ProfileFragment: Fragment() {
     lateinit var binding: FragmentProfileBinding
     private var myPostDatas = ArrayList<Post>()
+    private val EDIT_PROFILE_REQUEST_CODE = 123
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,11 +54,22 @@ class ProfileFragment: Fragment() {
         })
 
 
-        // 프로필 수정 클릭리스너
+        // 프로필 수정 버튼 클릭 리스너
         binding.settingBtn.setOnClickListener {
-            startActivity(Intent(requireActivity(), EditProfileActivity::class.java))
-        }
+            // Fragment에서 TextView 값 추출
+            val blogName = binding.blogName.text.toString()
+            val userName = binding.userName.text.toString()
+            val userIntroduction = binding.userIntroduction.text.toString()
 
+            // Intent 생성 및 값 전달
+            val intent = Intent(context, EditProfileActivity::class.java).apply {
+                putExtra("BLOG_NAME", blogName)
+                putExtra("USER_NAME", userName)
+                putExtra("USER_INTRODUCTION", userIntroduction)
+            }
+
+            startActivityForResult(intent, EDIT_PROFILE_REQUEST_CODE)
+        }
 
         // item 구분선
         val dividerItemDecoration = DividerItemDecoration(binding.profilePostRv.context, LinearLayoutManager.VERTICAL)
@@ -70,4 +84,18 @@ class ProfileFragment: Fragment() {
         return binding.root
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_PROFILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // EditProfileActivity에서 전달된 수정된 프로필 정보 처리
+            val editedBlogName = data?.getStringExtra("BLOG_NAME")
+            val editedUserName = data?.getStringExtra("USER_NAME")
+            val editedUserIntroduction = data?.getStringExtra("USER_INTRODUCTION")
+
+            // 수정된 프로필 정보를 TextView에 반영
+            binding.blogName.text = editedBlogName
+            binding.userName.text = editedUserName
+            binding.userIntroduction.text = editedUserIntroduction
+        }
+    }
 }
