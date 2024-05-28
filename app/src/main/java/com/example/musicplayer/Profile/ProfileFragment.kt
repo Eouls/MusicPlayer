@@ -62,16 +62,6 @@ class ProfileFragment: Fragment() {
                 LinearLayoutManager.VERTICAL
             )
         )
-        /*// RecyclerView 설정
-        profileRVAdapter = ProfileRVAdapter(ArrayList())
-        binding.profilePostRv.adapter = profileRVAdapter
-        binding.profilePostRv.layoutManager = LinearLayoutManager(context)
-        binding.profilePostRv.addItemDecoration(
-            DividerItemDecoration(
-                binding.profilePostRv.context,
-                LinearLayoutManager.VERTICAL
-            )
-        )*/
 
         // 프로필 수정 버튼 클릭 시 EditProfileActivity 실행
         binding.settingBtn.setOnClickListener {

@@ -8,7 +8,7 @@ import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ItemBlogPostBinding
 import com.example.musicplayer.post.Post
 
-class BlogRVAdapter (private val postList: ArrayList<Post>) :
+class BlogRVAdapter (private var posts: ArrayList<Post>) :
     RecyclerView.Adapter<BlogRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스 정의
@@ -25,7 +25,7 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
 
     // 저장된 글 삭제
     fun removeItem(position: Int) {
-        postList.removeAt(position)
+        posts.removeAt(position)
         notifyDataSetChanged()
     }
 
@@ -41,7 +41,7 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
     }
 
     override fun onBindViewHolder(holder: BlogRVAdapter.ViewHolder, position: Int) {
-        holder.bind(postList[position])
+        holder.bind(posts[position])
         holder.binding.itemPostMoreIv.setOnClickListener {
             mItemClickListener.onRemoveItem(position)
             removeItem(position)
@@ -49,7 +49,7 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
     }
 
     // 데이터 세트 크기 함수
-    override fun getItemCount(): Int = postList.size
+    override fun getItemCount(): Int = posts.size
 
     // 뷰 홀더
     inner class ViewHolder(val binding: ItemBlogPostBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -69,5 +69,10 @@ class BlogRVAdapter (private val postList: ArrayList<Post>) :
                 binding.itemPostImgIv.setImageResource(R.drawable.img_post_default) // 기본 이미지 설정
             }
         }
+    }
+
+    fun setData(newPosts: List<Post>) {
+        posts = newPosts as ArrayList<Post>
+        notifyDataSetChanged()
     }
 }
