@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -67,8 +68,6 @@ class MainActivity : AppCompatActivity() {
         }
         binding.mainPauseBtn.setOnClickListener {
             setPlayerStatus(false)
-            Log.d("pausebtn", songs[nowPos].second.toString())
-            Log.d("pausebtn2", mediaPlayer?.currentPosition.toString())
         }
         binding.mainMinipreviousIv.setOnClickListener {
             moveSong(-1)
@@ -79,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setPlayerStatus(isPlaying: Boolean) {
-        if (isPlaying) {
+        if (isPlaying) { // 재생 중
             binding.mainMiniplayBtn.visibility = View.GONE
             binding.mainPauseBtn.visibility = View.VISIBLE
             mediaPlayer?.start()
@@ -87,10 +86,10 @@ class MainActivity : AppCompatActivity() {
             // 추가: 현재 노래의 재생 시간을 체크하는 스레드 시작
             handler.post(updateSeekBarTask)
             checkSongEnd() // 추가: 노래가 끝났는지 확인하고 다음 노래로 이동할 수 있도록 함
-        } else {
+        } else { // 일시 정지
             binding.mainMiniplayBtn.visibility = View.VISIBLE
             binding.mainPauseBtn.visibility = View.GONE
-            if (mediaPlayer?.isPlaying == true) {
+            if (mediaPlayer?.isPlaying == true) { // 재생 중이 아닐 때에 pause를 하면 에러가 나기 때문에 이를 방지
                 mediaPlayer?.pause()
             }
             handler.removeCallbacks(updateSeekBarTask)
@@ -104,16 +103,20 @@ class MainActivity : AppCompatActivity() {
                 val currentProgress = mediaPlayer!!.currentPosition / 1000
                 val totalDuration = songs[nowPos].playTime
 
-                if (currentProgress >= totalDuration) {
+                if (currentProgress + 1 >= totalDuration) {
                     // 현재 노래가 종료되었으므로 다음 노래로 이동
-                    moveSong(1)
+                    moveSong(+1)
                 } else {
                     // 다음 체크를 위해 재귀 호출
                     checkSongEnd()
+                    Log.d("progress", currentProgress.toString())
+                    Log.d("progressplaytime", songs[nowPos].playTime.toString())
+
                 }
             }
         }, 1000) // 1초마다 체크
     }
+
     private fun moveSong(direct: Int) {
         if (nowPos + direct < 0) {
             Toast.makeText(this, "first song", Toast.LENGTH_SHORT).show()
@@ -126,9 +129,9 @@ class MainActivity : AppCompatActivity() {
 
         nowPos += direct
 
-//        startTimer()
         mediaPlayer?.release()
         mediaPlayer = null
+        songs[nowPos].second = 0
 
         setMiniPlayer(songs[nowPos])
         setPlayerStatus(true)
@@ -141,12 +144,16 @@ class MainActivity : AppCompatActivity() {
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
+        // SeekBar의 최대값을 노래의 총 재생 시간으로 설정
         binding.mainSeekbarSb.max = song.playTime * 1000
 
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
+
+        // 미디어 플레이어의 재생 위치를 저장 된 재생시간으로 설정
         mediaPlayer?.seekTo(songs[nowPos].second * 1000)
 
+        // Seekbar progress 터치로 재생시간 옮기기
         binding.mainSeekbarSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
@@ -162,7 +169,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 // 사용자가 터치를 끝냈을 때 호출
-                    mediaPlayer?.start()
+                mediaPlayer?.start()
+                checkSongEnd()
             }
         })
 
@@ -198,10 +206,11 @@ class MainActivity : AppCompatActivity() {
 
         nowPos = getPlayingSongPosition(songId)
         setMiniPlayer(songs[nowPos])
-        setPlayerStatus(true)
+        setPlayerStatus(true) // 미디어 플레이어 다시 재생
 
     }
 
+    // 현재 재생 정보를 저장해두는 역할
     override fun onPause() {
         super.onPause()
         Log.d("pause", "pause 발생")
@@ -216,6 +225,15 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
+
+    // 사용자가 포커스를 잃으면 미디어 플레이어 해제
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
+        mediaPlayer = null // 미디어 플레이어 해제
+    }
+
+    // songId로 position을 얻는 메서드
     private fun getPlayingSongPosition(songId: Int): Int{
         for (i in 0 until songs.size){
             if (songs[i].id == songId){
@@ -252,7 +270,7 @@ class MainActivity : AppCompatActivity() {
                 "Bubble Gum",
                 "NewJeans",
                 0,
-                201,
+                200,
                 false,
                 "music_bubblegum",
                 R.drawable.bubblegum,
@@ -278,7 +296,7 @@ class MainActivity : AppCompatActivity() {
                 "Impossible",
                 "RIIZE",
                 0,
-                183,
+                182,
                 false,
                 "music_impossible",
                 R.drawable.impossible,
@@ -291,7 +309,7 @@ class MainActivity : AppCompatActivity() {
                 "ETA",
                 "NewJeans",
                 0,
-                152,
+                151,
                 false,
                 "music_eta",
                 R.drawable.newjeans,
@@ -304,7 +322,7 @@ class MainActivity : AppCompatActivity() {
                 "Super shy",
                 "NewJeans",
                 0,
-                155,
+                154,
                 false,
                 "music_supershy",
                 R.drawable.newjeans,
@@ -317,7 +335,7 @@ class MainActivity : AppCompatActivity() {
                 "SHEESH",
                 "BABYMONSTER",
                 0,
-                171,
+                170,
                 false,
                 "music_sheesh",
                 R.drawable.sheesh,
@@ -330,7 +348,7 @@ class MainActivity : AppCompatActivity() {
                 "첫 만남은 계획대로 되지 않아",
                 "TWS",
                 0,
-                153,
+                152,
                 false,
                 "music_firstmeet",
                 R.drawable.firstmeet,
@@ -356,7 +374,7 @@ class MainActivity : AppCompatActivity() {
                 "Shopper",
                 "아이유 (IU)",
                 0,
-                216,
+                215,
                 false,
                 "music_shopper",
                 R.drawable.shopper,
