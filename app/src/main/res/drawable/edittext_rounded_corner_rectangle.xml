@@ -9,7 +9,7 @@
                 android:color="#BF00FF"/>
             <corners android:radius="4dp"/>
             <solid
-                android:color="#FFFFFF"/>
+                android:color="@color/transparent"/>
         </shape>
     </item>
 
@@ -22,7 +22,7 @@
                 android:color="#EEEEEE"/>
             <corners android:radius="4dp"/>
             <solid
-                android:color="#FFFFFF"/>
+                android:color="@color/transparent"/>
         </shape>
     </item>
 </selector>
