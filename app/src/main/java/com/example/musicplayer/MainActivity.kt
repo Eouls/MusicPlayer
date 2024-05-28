@@ -11,10 +11,9 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.Blog.BlogFragment
-import com.example.musicplayer.Blog.PostActivity
+import com.example.musicplayer.post.PostActivity
 import com.example.musicplayer.Home.HomeFragment
 import com.example.musicplayer.Profile.ProfileFragment
-import com.example.musicplayer.Locker.LikedSongFragment
 import com.example.musicplayer.Locker.LockerFragment
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongActivity

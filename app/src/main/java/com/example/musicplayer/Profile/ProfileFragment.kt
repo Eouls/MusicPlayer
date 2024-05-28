@@ -3,20 +3,22 @@ package com.example.musicplayer.Profile
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentProfileBinding
+import com.example.musicplayer.post.Post
+import com.example.musicplayer.post.PostDatabase
 
 class ProfileFragment: Fragment() {
     lateinit var binding: FragmentProfileBinding
-    private var myPostDatas = ArrayList<Post>()
+    private lateinit var postDatabase: PostDatabase
+    private lateinit var profileRVAdapter: ProfileRVAdapter
     private val EDIT_PROFILE_REQUEST_CODE = 123
 
     override fun onCreateView(
@@ -29,32 +31,49 @@ class ProfileFragment: Fragment() {
 
         // 스크롤 시 툴바 세팅
         val activity = activity as? AppCompatActivity
-//        activity?.setSupportActionBar(binding.toolbar)
         activity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         activity?.supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        // 사용자의 이름을 Singleton 객체에 저장
+        UserData.userName = binding.userName.text.toString()
 
-        // 더미데이터
-        myPostDatas.apply {
-            add(Post(R.drawable.img_post_1, "제목1", "", "내용1", "2024.05.28"))
-            add(Post(R.drawable.img_post_2, "제목2", "","내용2\n김기찬 군은 돼지일까요 아닐까요 ?", "2024.05.27"))
-            add(Post(R.drawable.img_post_3, "제목3", "","내용3\n정답은요...", "2024.05.26"))
-            add(Post(R.drawable.img_post_4, "제목4", "","내용4\n돼지였습니다ㅡ!!", "2024.05.25"))
-            add(Post(R.drawable.img_post_5, "제목5", "","내용5\n^0^","2024.05.24"))
+
+        // 데이터베이스에서 게시물 데이터 가져오기
+        postDatabase = PostDatabase.getInstance(requireContext()) as PostDatabase
+        if (postDatabase == null) {
+            // 데이터베이스가 null인 경우, onCreateView 함수를 종료하고 null을 반환
+            return super.onCreateView(inflater, container, savedInstanceState)
         }
 
-        val profileRVAdapter = ProfileRVAdapter(myPostDatas)
+        // postDatabase의 모든 데이터 로그캣 출력
+        val postt = postDatabase.postDao().getPosts()
+        for (post in postt) {
+            Log.d("PostData", "Title: ${post.title}, Content: ${post.content}")
+        }
+
+        // RecyclerView 설정
+        profileRVAdapter = ProfileRVAdapter(ArrayList<Post>()) // 빈 리스트로 초기화
         binding.profilePostRv.adapter = profileRVAdapter
-        binding.profilePostRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.profilePostRv.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.profilePostRv.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL
+            )
+        )
+        /*// RecyclerView 설정
+        profileRVAdapter = ProfileRVAdapter(ArrayList())
+        binding.profilePostRv.adapter = profileRVAdapter
+        binding.profilePostRv.layoutManager = LinearLayoutManager(context)
+        binding.profilePostRv.addItemDecoration(
+            DividerItemDecoration(
+                binding.profilePostRv.context,
+                LinearLayoutManager.VERTICAL
+            )
+        )*/
 
-        profileRVAdapter.setMyItemClickListener(object : ProfileRVAdapter.MyItemClickListener {
-            override fun onRemoveItem(position: Int) {
-                profileRVAdapter.removeItem(position)
-            }
-        })
-
-
-        // 프로필 수정 버튼 클릭 리스너
+        // 프로필 수정 버튼 클릭 시 EditProfileActivity 실행
         binding.settingBtn.setOnClickListener {
             // Fragment에서 TextView 값 추출
             val blogName = binding.blogName.text.toString()
@@ -75,11 +94,17 @@ class ProfileFragment: Fragment() {
         val dividerItemDecoration = DividerItemDecoration(binding.profilePostRv.context, LinearLayoutManager.VERTICAL)
         binding.profilePostRv.addItemDecoration(dividerItemDecoration)
 
+        // post 삭제 클릭 이벤트
         profileRVAdapter.setMyItemClickListener(object : ProfileRVAdapter.MyItemClickListener {
             override fun onRemoveItem(position: Int) {
                 profileRVAdapter.removeItem(position)
             }
         })
+
+        // 데이터베이스에서 포스트 목록을 가져와 어댑터에 설정
+        val postDatabase = PostDatabase.getInstance(requireContext())
+        val posts = postDatabase?.postDao()?.getPosts()
+        posts?.let { profileRVAdapter.setData(it) }
 
         return binding.root
     }
@@ -96,6 +121,9 @@ class ProfileFragment: Fragment() {
             binding.blogName.text = editedBlogName
             binding.userName.text = editedUserName
             binding.userIntroduction.text = editedUserIntroduction
+
+            // 수정된 사용자 이름을 Singleton 객체에 저장
+            UserData.userName = editedUserName
         }
     }
 }

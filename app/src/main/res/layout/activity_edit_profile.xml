@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:text="적용"
             android:textSize="18dp"
+            android:textColor="@color/black"
             android:layout_gravity="right"
             android:background="@color/transparent"/>
 

@@ -54,6 +54,10 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.8.7") // gson
 
+    // image loading
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
     // Room DB
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
