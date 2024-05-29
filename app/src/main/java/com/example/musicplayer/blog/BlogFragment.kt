@@ -1,20 +1,25 @@
 package com.example.musicplayer.blog
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.databinding.FragmentBlogBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BlogFragment: Fragment() {
     lateinit var binding: FragmentBlogBinding
     private lateinit var postDB: PostDatabase
     private lateinit var blogRVAdapter: BlogRVAdapter
+    private var userImgPath: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +79,15 @@ class BlogFragment: Fragment() {
             blogRVAdapter.setData(it)
             // RecyclerView를 가장 최근 항목으로 스크롤
             binding.blogPostRv.scrollToPosition(it.size - 1)
+        }
+    }
+
+    // 사용자 프로필 이미지 경로를 가져오는 함수
+    private fun fetchUserProfileImagePath() {
+        lifecycleScope.launch(Dispatchers.IO) {
+
+            // 최신 사용자 이미지 경로를 가져왔으므로, RecyclerView 어댑터에도 알려줍니다.
+            blogRVAdapter.setUserProfileImagePath(userImgPath)
         }
     }
 

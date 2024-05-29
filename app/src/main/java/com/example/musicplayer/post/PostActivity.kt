@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.databinding.ActivityPostBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -22,8 +23,8 @@ import java.util.Locale
 class PostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostBinding
     private lateinit var postDatabase: PostDatabase
-    private var imageUri: Uri? = null
-    private var imagePath: String? = null
+    private var contentImgUri: Uri? = null
+    private var contentImgPath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class PostActivity : AppCompatActivity() {
             val content = binding.postContentTv.text.toString()
             val currentDate = getCurrentDate()
             val userName = getUserName()
-            val imagePath = imageUri?.let { saveImageToInternalStorage(it) }
+            val contentImgPath = contentImgUri?.let { saveImageToInternalStorage(it) }
 
             // 입력된 데이터를 데이터베이스에 저장
             val post = Post(
@@ -57,7 +58,7 @@ class PostActivity : AppCompatActivity() {
                 name = userName,
                 content = content,
                 date = currentDate,
-                imagePath = imagePath
+                contentImgPath = contentImgPath
             )
             insertPost(post)
 
@@ -86,7 +87,7 @@ class PostActivity : AppCompatActivity() {
             try {
                 val option = BitmapFactory.Options()
                 val uri = it.data!!.data!!
-                imageUri = uri // 이미지 URI 저장
+                contentImgUri = uri // 이미지 URI 저장
 
                 //이미지 로딩
                 val inputStream = contentResolver.openInputStream(uri)
@@ -95,7 +96,7 @@ class PostActivity : AppCompatActivity() {
 
                 if (bitmap != null) {
                     binding.postImgIv.setImageBitmap(bitmap)
-                    imagePath = it.data!!.data!!.toString()
+                    contentImgPath = it.data!!.data!!.toString()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

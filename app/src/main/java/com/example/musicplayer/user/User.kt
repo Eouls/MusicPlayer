@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "UserTable")
 data class User(
-        val imagePath: String? = null,
+        val coverImgPath: String? = null,
+        val profileImgPath: String? = null,
         val blogName: String = "",
         val userName : String = "",
         val introduction : String = "",
