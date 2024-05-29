@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.musicplayer.Function.CustomSnackbar
 import com.example.musicplayer.databinding.ActivitySongBinding
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
@@ -183,12 +184,12 @@ class SongActivity: AppCompatActivity() {
         if (isLike){
             binding.songLikeOffIv.visibility = View.GONE
             binding.songLikeOnIv.visibility = View.VISIBLE
-//            CustomSnackbar.make(binding.root, "좋아요 한 곡에 담겼습니다.").setAnchorView(binding.songRelatedIv).show()
+            CustomSnackbar.make(binding.root, "좋아요 한 곡에 담겼습니다.").setAnchorView(binding.songSeekbarSb).show()
 
         } else{
             binding.songLikeOffIv.visibility = View.VISIBLE
             binding.songLikeOnIv.visibility = View.GONE
-//            CustomSnackbar.make(binding.root, "좋아요 한 곡이 취소되었습니다.").setAnchorView(binding.songRelatedIv).show()
+            CustomSnackbar.make(binding.root, "좋아요 한 곡이 취소되었습니다.").setAnchorView(binding.songSeekbarSb).show()
         }
     }
 

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.musicplayer.Blog.BlogRVAdapter
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongDatabase
 import com.example.musicplayer.databinding.FragmentLockerLikedsongBinding
@@ -22,6 +24,11 @@ class LikedSongFragment: Fragment() {
         binding = FragmentLockerLikedsongBinding.inflate(inflater, container, false)
 
         songDB = SongDatabase.getInstance(requireContext())!!
+
+        // item 구분선
+        val dividerItemDecoration = DividerItemDecoration(binding.lockerLikedsongRv.context, LinearLayoutManager.VERTICAL)
+        binding.lockerLikedsongRv.addItemDecoration(dividerItemDecoration)
+
 
         return binding.root
     }

@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_MusicPlayer)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -199,6 +200,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("resume", "resume 발생")
 
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
         val songId = sharedPreferences.getInt("songId", 0)
@@ -214,6 +216,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         Log.d("pause", "pause 발생")
+
         songs[nowPos].second = binding.mainSeekbarSb.progress / 1000
         Log.d("mainpauseprogress", binding.mainSeekbarSb.progress.toString())
 
@@ -229,6 +232,16 @@ class MainActivity : AppCompatActivity() {
     // 사용자가 포커스를 잃으면 미디어 플레이어 해제
     override fun onStop() {
         super.onStop()
+        Log.d("onStop", "onstop발생")
+
+        songs[nowPos].second = binding.mainSeekbarSb.progress / 1000
+
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("songSecond", songs[nowPos].second)
+        editor.putInt("songId", songs[nowPos].id)
+
+        editor.apply()
         mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
         mediaPlayer = null // 미디어 플레이어 해제
     }
