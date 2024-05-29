@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@android:color/transparent"
         android:elevation="4dp">
 
@@ -20,7 +20,9 @@
             android:layout_height="wrap_content"
             android:text="이웃새글"
             android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="45dp"/>
 
     </androidx.appcompat.widget.Toolbar>
 

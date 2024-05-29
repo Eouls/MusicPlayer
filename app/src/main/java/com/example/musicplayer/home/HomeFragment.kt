@@ -5,19 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.Album.Album
 import com.example.musicplayer.Album.AlbumRVAdapter
 import com.example.musicplayer.R
+import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongDatabase
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
 import com.example.musicplayer.profile.ProfileRVAdapter
 
+
 class HomeFragment: Fragment() {
     lateinit var binding: FragmentHomeBinding
     private var albumDatas = ArrayList<Album>()
+    private var fastSongs = ArrayList<Song>()
     private lateinit var postDatabase: PostDatabase
     private lateinit var songDB: SongDatabase
 
@@ -32,6 +36,7 @@ class HomeFragment: Fragment() {
 
         songDB = SongDatabase.getInstance(requireContext())!!
         albumDatas.addAll(songDB.albumDao().getAlbums()) // songDB에서 album list를 가져옵니다.
+        fastSongs.addAll(songDB.songDao().getSongs())
 
         // 데이터베이스에서 게시물 데이터 가져오기
         postDatabase = PostDatabase.getInstance(requireContext()) as PostDatabase
@@ -43,14 +48,17 @@ class HomeFragment: Fragment() {
         // 더미데이터랑 Adapter 연결
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
         val profileRVAdapter = ProfileRVAdapter(ArrayList<Post>())
+        val fastSongRVAdpater = FastSongRVAdpater(fastSongs)
         // 리사이클러뷰에 어댑터를 연결
         binding.homePopularAlbumAlbumRv.adapter = albumRVAdapter
         binding.homeReplayAlbumTitleRv.adapter = albumRVAdapter
         binding.homeMypostingRv.adapter = profileRVAdapter
+        binding.homeFastSongRv.adapter = fastSongRVAdpater
         // 레이아웃 매니저 설정
         binding.homePopularAlbumAlbumRv.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         binding.homeReplayAlbumTitleRv.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         binding.homeMypostingRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.homeFastSongRv.layoutManager = GridLayoutManager(context, 4, GridLayoutManager.HORIZONTAL, false)
 
         // 데이터베이스에서 포스트 목록을 가져와 어댑터에 설정
         val postDatabase = PostDatabase.getInstance(requireContext())
