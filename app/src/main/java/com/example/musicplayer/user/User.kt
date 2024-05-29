@@ -1,4 +1,4 @@
-package com.example.musicplayer.User
+package com.example.musicplayer.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,15 +1,12 @@
-package com.example.musicplayer.Profile
+package com.example.musicplayer.profile
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.musicplayer.R
-import com.example.musicplayer.User.User
-import com.example.musicplayer.User.UserDatabase
+import com.example.musicplayer.user.User
+import com.example.musicplayer.user.UserDatabase
 import com.example.musicplayer.databinding.ActivityEditProfileBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,6 +23,13 @@ class EditProfileActivity : AppCompatActivity() {
 
         // UserDatabase 초기화
         userDatabase = UserDatabase.getInstance(this)!!
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val allUsers = userDatabase.userDao().getUsers()
+            allUsers.forEach { user ->
+                Log.d("UserDataEdit", "ID: ${user.id}, Blog Name: ${user.blogName}, User Name: ${user.userName}, Introduction: ${user.introduction}")
+            }
+        }
 
         // Intent로부터 값 수신
         val blogName = intent.getStringExtra("BLOG_NAME") ?: ""

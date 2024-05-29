@@ -1,4 +1,4 @@
-package com.example.musicplayer.Profile
+package com.example.musicplayer.profile
 
 import android.app.Activity
 import android.content.Context
@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.User.User
-import com.example.musicplayer.User.UserDatabase
+import com.example.musicplayer.user.User
+import com.example.musicplayer.user.UserDatabase
 import com.example.musicplayer.databinding.FragmentProfileBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
@@ -38,6 +38,13 @@ class ProfileFragment: Fragment() {
 
         // UserDatabase 초기화
         userDatabase = UserDatabase.getInstance(requireContext())!!
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val allUsers = userDatabase.userDao().getUsers()
+            allUsers.forEach { user ->
+                Log.d("UserData", "ID: ${user.id}, Blog Name: ${user.blogName}, User Name: ${user.userName}, Introduction: ${user.introduction}")
+            }
+        }
 
         // 스크롤 시 툴바 세팅
         val activity = activity as? AppCompatActivity

@@ -1,4 +1,4 @@
-package com.example.musicplayer.User
+package com.example.musicplayer.user
 
 import android.content.Context
 import androidx.room.Database

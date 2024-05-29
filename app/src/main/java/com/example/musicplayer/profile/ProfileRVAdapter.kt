@@ -1,4 +1,4 @@
-package com.example.musicplayer.Profile
+package com.example.musicplayer.profile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -17,7 +17,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Profile.EditProfileActivity"
+            android:name=".profile.EditProfileActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Song.SongActivity" />

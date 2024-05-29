@@ -1,4 +1,4 @@
-package com.example.musicplayer.Locker
+package com.example.musicplayer.locker
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

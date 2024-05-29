@@ -1,4 +1,4 @@
-package com.example.musicplayer.Locker
+package com.example.musicplayer.locker
 
 import android.os.Bundle
 import android.view.LayoutInflater

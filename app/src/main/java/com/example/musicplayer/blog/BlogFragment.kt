@@ -1,4 +1,4 @@
-package com.example.musicplayer.Blog
+package com.example.musicplayer.blog
 
 import android.os.Bundle
 import android.view.LayoutInflater

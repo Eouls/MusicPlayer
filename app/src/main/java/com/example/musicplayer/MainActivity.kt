@@ -10,10 +10,10 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.musicplayer.Blog.BlogFragment
-import com.example.musicplayer.Home.HomeFragment
-import com.example.musicplayer.Locker.LockerFragment
-import com.example.musicplayer.Profile.ProfileFragment
+import com.example.musicplayer.blog.BlogFragment
+import com.example.musicplayer.home.HomeFragment
+import com.example.musicplayer.locker.LockerFragment
+import com.example.musicplayer.profile.ProfileFragment
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongActivity
 import com.example.musicplayer.Song.SongDatabase
