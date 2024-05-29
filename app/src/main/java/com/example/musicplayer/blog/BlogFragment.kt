@@ -73,13 +73,15 @@ class BlogFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 데이터베이스에서 포스트 목록을 가져와 어댑터에 설정
-        val postDatabase = PostDatabase.getInstance(requireContext())
-        val posts = postDatabase?.postDao()?.getPosts()
+        val postDB = PostDatabase.getInstance(requireContext())
+        val posts = postDB?.postDao()?.getPosts()
         posts?.let {
             blogRVAdapter.setData(it)
             // RecyclerView를 가장 최근 항목으로 스크롤
             binding.blogPostRv.scrollToPosition(it.size - 1)
         }
+        // 사용자 프로필 이미지 경로 가져오기
+        fetchUserProfileImagePath()
     }
 
     // 사용자 프로필 이미지 경로를 가져오는 함수

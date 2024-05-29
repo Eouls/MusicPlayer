@@ -156,14 +156,4 @@ class EditProfileActivity : AppCompatActivity() {
         fos.close()
         return file.absolutePath
     }
-
-
-    /*
-    private fun updateUserInDatabase(coverImgPath: String, profileImgPath: String, blogName: String, userName: String, introduction: String) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val newUser = User(coverImgPath = coverImgPath, profileImgPath = profileImgPath, blogName = blogName, userName = userName, introduction = introduction)
-            userDB.userDao().insert(newUser)
-        }
-    }
-    */
 }
