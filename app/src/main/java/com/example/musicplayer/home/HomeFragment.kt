@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.Album.Album
+import com.example.musicplayer.Album.AlbumFragment
 import com.example.musicplayer.Album.AlbumRVAdapter
+import com.example.musicplayer.MainActivity
 import com.example.musicplayer.R
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongDatabase
@@ -16,6 +18,7 @@ import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
 import com.example.musicplayer.profile.ProfileRVAdapter
+import com.google.gson.Gson
 
 
 class HomeFragment: Fragment() {
@@ -65,7 +68,27 @@ class HomeFragment: Fragment() {
         val posts = postDatabase?.postDao()?.getPosts()
         posts?.let { profileRVAdapter.setData(it) }
 
+        // 앨범 아이템 클릭 시 프래그 먼트 전환
+        albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener {
+            override fun onItemClick(album: Album) {
+                changeAlbumFragment(album)
+            }
+        })
+
         return binding.root
+    }
+
+    // 인기 급상승 앨범 아이템 클릭 시 프래그먼트 전환
+    private fun changeAlbumFragment(album: Album) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, AlbumFragment().apply {
+                arguments = Bundle().apply {
+                    val gson = Gson()
+                    val albumJson = gson.toJson(album)
+                    putString("album", albumJson)
+                }
+            })
+            .commitAllowingStateLoss()
     }
 
     private fun inputDummyAlbums() {
@@ -79,7 +102,8 @@ class HomeFragment: Fragment() {
                 1,
                 "Armageddon - The 1st Album",
                 "aespa",
-                R.drawable.supernova
+                R.drawable.supernova,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -87,7 +111,8 @@ class HomeFragment: Fragment() {
                 2,
                 "How Sweet",
                 "NewJeans",
-                R.drawable.bubblegum
+                R.drawable.bubblegum,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -95,7 +120,8 @@ class HomeFragment: Fragment() {
                 3,
                 "SUPER REAL ME",
                 "ILLIT",
-                R.drawable.magnetic
+                R.drawable.magnetic,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -103,7 +129,8 @@ class HomeFragment: Fragment() {
                 4,
                 "Impossible",
                 "RIIZE",
-                R.drawable.impossible
+                R.drawable.impossible,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -111,7 +138,8 @@ class HomeFragment: Fragment() {
                 5,
                 "NewJeans 2nd EP 'Get Up'",
                 "NewJeans",
-                R.drawable.newjeans
+                R.drawable.newjeans,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -119,7 +147,8 @@ class HomeFragment: Fragment() {
                 6,
                 "BABYMONS7ER",
                 "BABYMONSTER",
-                R.drawable.sheesh
+                R.drawable.sheesh,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -127,7 +156,8 @@ class HomeFragment: Fragment() {
                 7,
                 "TWS : 1st Mini Album 'Sparkling Blue'",
                 "TWS",
-                R.drawable.firstmeet
+                R.drawable.firstmeet,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -135,7 +165,8 @@ class HomeFragment: Fragment() {
                 8,
                 "Drama - The 4th Mini Album",
                 "aespa",
-                R.drawable.drama
+                R.drawable.drama,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -143,7 +174,8 @@ class HomeFragment: Fragment() {
                 9,
                 "The Winning",
                 "아이유 (IU)",
-                R.drawable.shopper
+                R.drawable.shopper,
+                false
             )
         )
         songDB.albumDao().insert(
@@ -151,7 +183,8 @@ class HomeFragment: Fragment() {
                 10,
                 "メズマライザー",
                 "サツキ, 初音ミク, 重音テト",
-                R.drawable.mesmerizer
+                R.drawable.mesmerizer,
+                false
             )
         )
     }

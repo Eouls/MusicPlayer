@@ -8,5 +8,7 @@ data class Album(
     @PrimaryKey(autoGenerate = false) var id: Int = 0, // album의 pk는 임의로 지정해주기 위해 autogenerate 사용 x
     var title: String? = "",
     var singer: String? = "",
-    var coverImg: Int? = null
+    var coverImg: Int? = null,
+    var isLike: Boolean = false,
+    var releaseDate: String? = ""
 )
