@@ -12,7 +12,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@android:color/transparent"
         android:elevation="4dp">
 
@@ -20,6 +20,8 @@
             android:id="@+id/post_edit_cancel_btn"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginStart="20dp"
             android:src="@drawable/btn_back_black"
             android:background="@android:color/transparent"/>
 
@@ -31,6 +33,7 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             android:layout_gravity="right"
+            android:layout_marginTop="35dp"
             android:background="@color/transparent"/>
     </androidx.appcompat.widget.Toolbar>
 
