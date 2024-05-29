@@ -335,7 +335,7 @@ class MainActivity : AppCompatActivity() {
                 "Super shy",
                 "NewJeans",
                 0,
-                154,
+                155,
                 false,
                 "music_supershy",
                 R.drawable.newjeans,
