@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
-import com.example.musicplayer.post.Post
 import com.example.musicplayer.databinding.ItemProfilePostBinding
+import com.example.musicplayer.post.Post
 
 class ProfileRVAdapter (private var posts: ArrayList<Post>) :
     RecyclerView.Adapter<ProfileRVAdapter.ViewHolder>() {

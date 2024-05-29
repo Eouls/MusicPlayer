@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.Blog.BlogRVAdapter
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongDatabase
 import com.example.musicplayer.databinding.FragmentLockerLikedsongBinding

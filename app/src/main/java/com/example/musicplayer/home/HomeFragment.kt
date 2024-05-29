@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.Album.Album
 import com.example.musicplayer.Album.AlbumRVAdapter
-import com.example.musicplayer.Profile.ProfileRVAdapter
 import com.example.musicplayer.R
 import com.example.musicplayer.Song.SongDatabase
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
+import com.example.musicplayer.profile.ProfileRVAdapter
 
 class HomeFragment: Fragment() {
     lateinit var binding: FragmentHomeBinding

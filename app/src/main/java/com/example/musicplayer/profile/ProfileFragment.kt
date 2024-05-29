@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.user.User
-import com.example.musicplayer.user.UserDatabase
 import com.example.musicplayer.databinding.FragmentProfileBinding
 import com.example.musicplayer.post.Post
 import com.example.musicplayer.post.PostDatabase
+import com.example.musicplayer.user.User
+import com.example.musicplayer.user.UserDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

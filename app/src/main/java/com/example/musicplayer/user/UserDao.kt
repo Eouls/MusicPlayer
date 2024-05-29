@@ -21,6 +21,6 @@ interface UserDao {
     fun getUsers(): List<User>
 
     @Query("SELECT * FROM UserTable WHERE id = :id")
-    fun getUsers(id: Int): User
+    fun getUser(id: Int): User
 
 }

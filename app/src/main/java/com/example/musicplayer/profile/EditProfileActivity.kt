@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.musicplayer.databinding.ActivityEditProfileBinding
 import com.example.musicplayer.user.User
 import com.example.musicplayer.user.UserDatabase
-import com.example.musicplayer.databinding.ActivityEditProfileBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

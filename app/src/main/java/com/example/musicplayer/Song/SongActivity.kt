@@ -12,7 +12,6 @@ import com.example.musicplayer.databinding.ActivitySongBinding
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Timer
-import kotlin.math.log
 
 class SongActivity: AppCompatActivity() {
     lateinit var binding: ActivitySongBinding

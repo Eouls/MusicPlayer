@@ -21,6 +21,6 @@ interface PostDao {
     fun getPosts(): List<Post>
 
     @Query("SELECT * FROM PostTable WHERE id = :id")
-    fun getPosts(id: Int): Post
+    fun getPost(id: Int): Post
 
 }

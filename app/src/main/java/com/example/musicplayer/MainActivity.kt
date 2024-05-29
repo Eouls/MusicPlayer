@@ -10,15 +10,15 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.musicplayer.blog.BlogFragment
-import com.example.musicplayer.home.HomeFragment
-import com.example.musicplayer.locker.LockerFragment
-import com.example.musicplayer.profile.ProfileFragment
 import com.example.musicplayer.Song.Song
 import com.example.musicplayer.Song.SongActivity
 import com.example.musicplayer.Song.SongDatabase
+import com.example.musicplayer.blog.BlogFragment
 import com.example.musicplayer.databinding.ActivityMainBinding
+import com.example.musicplayer.home.HomeFragment
+import com.example.musicplayer.locker.LockerFragment
 import com.example.musicplayer.post.PostActivity
+import com.example.musicplayer.profile.ProfileFragment
 import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
