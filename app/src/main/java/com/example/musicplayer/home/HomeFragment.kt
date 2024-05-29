@@ -103,7 +103,8 @@ class HomeFragment: Fragment() {
                 "Armageddon - The 1st Album",
                 "aespa",
                 R.drawable.supernova,
-                false
+                false,
+                "2024.05.27"
             )
         )
         songDB.albumDao().insert(
@@ -112,7 +113,8 @@ class HomeFragment: Fragment() {
                 "How Sweet",
                 "NewJeans",
                 R.drawable.bubblegum,
-                false
+                false,
+                "2024.05.24"
             )
         )
         songDB.albumDao().insert(
@@ -121,7 +123,8 @@ class HomeFragment: Fragment() {
                 "SUPER REAL ME",
                 "ILLIT",
                 R.drawable.magnetic,
-                false
+                false,
+                "2024.03.25"
             )
         )
         songDB.albumDao().insert(
@@ -130,7 +133,8 @@ class HomeFragment: Fragment() {
                 "Impossible",
                 "RIIZE",
                 R.drawable.impossible,
-                false
+                false,
+                "2024.04.29"
             )
         )
         songDB.albumDao().insert(
@@ -139,7 +143,8 @@ class HomeFragment: Fragment() {
                 "NewJeans 2nd EP 'Get Up'",
                 "NewJeans",
                 R.drawable.newjeans,
-                false
+                false,
+                "2023.07.21"
             )
         )
         songDB.albumDao().insert(
@@ -148,7 +153,8 @@ class HomeFragment: Fragment() {
                 "BABYMONS7ER",
                 "BABYMONSTER",
                 R.drawable.sheesh,
-                false
+                false,
+                "2024.04.01"
             )
         )
         songDB.albumDao().insert(
@@ -157,7 +163,8 @@ class HomeFragment: Fragment() {
                 "TWS : 1st Mini Album 'Sparkling Blue'",
                 "TWS",
                 R.drawable.firstmeet,
-                false
+                false,
+                "2024.01.22"
             )
         )
         songDB.albumDao().insert(
@@ -166,7 +173,8 @@ class HomeFragment: Fragment() {
                 "Drama - The 4th Mini Album",
                 "aespa",
                 R.drawable.drama,
-                false
+                false,
+                "2023.11.10"
             )
         )
         songDB.albumDao().insert(
@@ -175,7 +183,8 @@ class HomeFragment: Fragment() {
                 "The Winning",
                 "아이유 (IU)",
                 R.drawable.shopper,
-                false
+                false,
+                "2024.02.20"
             )
         )
         songDB.albumDao().insert(
@@ -184,7 +193,8 @@ class HomeFragment: Fragment() {
                 "メズマライザー",
                 "サツキ, 初音ミク, 重音テト",
                 R.drawable.mesmerizer,
-                false
+                false,
+                "2024.05.17"
             )
         )
     }
