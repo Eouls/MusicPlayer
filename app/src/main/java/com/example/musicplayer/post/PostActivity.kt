@@ -1,5 +1,6 @@
 package com.example.musicplayer.post
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -8,7 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.musicplayer.Profile.UserData
+import com.example.musicplayer.User.UserDatabase
 import com.example.musicplayer.databinding.ActivityPostBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -48,13 +49,14 @@ class PostActivity : AppCompatActivity() {
             val title = binding.postTitleTv.text.toString()
             val content = binding.postContentTv.text.toString()
             val currentDate = getCurrentDate()
+            val userName = getUserName()
             val imagePath = imageUri?.let { saveImageToInternalStorage(it) }
 
             // 입력된 데이터를 데이터베이스에 저장
             val post = Post(
                 title = title,
+                name = userName,
                 content = content,
-                name = getUserName(),
                 date = currentDate,
                 imagePath = imagePath
             )
@@ -117,10 +119,9 @@ class PostActivity : AppCompatActivity() {
         return file.absolutePath
     }
 
-    // 작성자 이름을 가져오는 함수 (임시!!)
+    // 작성자 이름을 가져오는 함수
     private fun getUserName(): String {
-        // ProfileFragment에서 작성자 이름을 가져오는 로직을 추가하세요.
-        // 예를 들어, SharedPreferences나 다른 방법으로 사용자 이름을 가져올 수 있습니다.
-        return "UserName" // 임시로 "UserName"을 반환합니다.
+        val sharedPreferences = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("USER_NAME", "Unknown User") ?: "Unknown User"
     }
 }

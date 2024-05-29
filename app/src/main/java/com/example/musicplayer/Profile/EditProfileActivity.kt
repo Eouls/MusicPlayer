@@ -8,14 +8,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.musicplayer.R
+import com.example.musicplayer.User.User
+import com.example.musicplayer.User.UserDatabase
 import com.example.musicplayer.databinding.ActivityEditProfileBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class EditProfileActivity : AppCompatActivity() {
     lateinit var binding: ActivityEditProfileBinding
+    private lateinit var userDatabase: UserDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // UserDatabase 초기화
+        userDatabase = UserDatabase.getInstance(this)!!
 
         // Intent로부터 값 수신
         val blogName = intent.getStringExtra("BLOG_NAME") ?: ""
@@ -46,9 +56,32 @@ class EditProfileActivity : AppCompatActivity() {
                 putExtra("USER_INTRODUCTION", userIntroduction)
             }
 
-            // 결과 Intent 설정하고 종료
+            // 결과 Intent 설정
             setResult(Activity.RESULT_OK, resultIntent)
+
+            // 업데이트된 사용자 이름 및 소개 정보를 전역 변수에 할당
+            var updatedBlogName = blogName
+            var updatedUserName = userName
+            var updatedUserIntroduction = userIntroduction
+
+            // 데이터베이스 업데이트
+            updateUserInDatabase(updatedBlogName, updatedUserName, updatedUserIntroduction)
+
             finish()
+        }
+    }
+    private fun updateUserInDatabase(blogName: String, userName: String, introduction: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val user = userDatabase.userDao().getUsers().firstOrNull()
+            if (user != null) {
+                // 사용자 정보 업데이트
+                val updatedUser = user.copy(blogName = blogName, userName = userName, introduction = introduction)
+                userDatabase.userDao().update(updatedUser)
+            } else {
+                // 사용자 정보가 없으면 새로 삽입
+                val newUser = User(blogName = blogName, userName = userName, introduction = introduction)
+                userDatabase.userDao().insert(newUser)
+            }
         }
     }
 }
