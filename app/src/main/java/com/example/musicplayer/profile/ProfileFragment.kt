@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.databinding.FragmentProfileBinding
@@ -25,8 +26,8 @@ import kotlinx.coroutines.withContext
 class ProfileFragment: Fragment() {
     lateinit var binding: FragmentProfileBinding
     private lateinit var postDB: PostDatabase
-    private lateinit var profileRVAdapter: ProfileRVAdapter
     private lateinit var userDB: UserDatabase
+    private lateinit var profileRVAdapter: ProfileRVAdapter
     private val EDIT_PROFILE_REQUEST_CODE = 123
 
     override fun onCreateView(
@@ -36,11 +37,13 @@ class ProfileFragment: Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        // userDB 초기화
+        // DB 초기화
         userDB = UserDatabase.getInstance(requireContext())!!
+        postDB = PostDatabase.getInstance(requireContext())!!
+
 
         // userData 로그캣 출력
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             val allUsers = userDB.userDao().getUsers()
             allUsers.forEach { user ->
                 Log.d("UserData", "ID: ${user.id}, Blog Name: ${user.blogName}, User Name: ${user.userName}, Introduction: ${user.introduction}")
@@ -52,12 +55,6 @@ class ProfileFragment: Fragment() {
         activity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         activity?.supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        // 데이터베이스에서 게시물 데이터 가져오기
-        postDB = PostDatabase.getInstance(requireContext()) as PostDatabase
-        if (postDB == null) {
-            // 데이터베이스가 null인 경우, onCreateView 함수를 종료하고 null을 반환
-            return super.onCreateView(inflater, container, savedInstanceState)
-        }
 
         // RecyclerView 설정
         profileRVAdapter = ProfileRVAdapter(ArrayList<Post>()) // 빈 리스트로 초기화
@@ -84,9 +81,6 @@ class ProfileFragment: Fragment() {
             val userName = binding.userName.text.toString()
             val userIntroduction = binding.userIntroduction.text.toString()
 
-            // SharedPreferences에 사용자 이름 저장
-            saveUserNameToPreferences(userName)
-
             // Intent 생성 및 값 전달
             val intent = Intent(context, EditProfileActivity::class.java).apply {
                 putExtra("BLOG_NAME", blogName)
@@ -104,32 +98,32 @@ class ProfileFragment: Fragment() {
         // post 삭제 클릭 이벤트
         profileRVAdapter.setMyItemClickListener(object : ProfileRVAdapter.MyItemClickListener {
             override fun onRemoveItem(position: Int) {
-                // profileRVAdapter.removeItem(position)
+                val postToRemove = profileRVAdapter.getPost(position)
+                removePostFromDatabase(postToRemove)
+                profileRVAdapter.removeItem(position)
             }
         })
-
-        // 데이터베이스에서 포스트 목록을 가져와 어댑터에 설정
-        val postDatabase = PostDatabase.getInstance(requireContext())
-        val posts = postDatabase?.postDao()?.getPosts()
-        posts?.let { profileRVAdapter.setData(it) }
 
         return binding.root
     }
 
-    
+    private fun removePostFromDatabase(post: Post) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            postDB.postDao().delete(post)
+        }
+    }
 
+    // 데이터베이스에서 포스트 목록을 가져와 어댑터에 설정
     private fun loadPostsFromDatabase() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val postsFromDatabase = postDB.postDao().getPosts()
-            withContext(Dispatchers.Main) {
-                profileRVAdapter.setData(postsFromDatabase)
-            }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val posts = postDB?.postDao()?.getPosts()
+            posts?.let { profileRVAdapter.setData(it) }
         }
     }
 
     private fun loadUserData() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val user = userDB.userDao().getUsers().firstOrNull()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val user = userDB.userDao().getUsers().lastOrNull()
             withContext(Dispatchers.Main) {
                 user?.let {
                     binding.blogName.text = it.blogName
@@ -169,17 +163,11 @@ class ProfileFragment: Fragment() {
         }
     }
     private fun updateUserInDatabase(blogName: String, userName: String, introduction: String) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val user = userDB.userDao().getUsers().firstOrNull()
-            if (user != null) {
-                // 사용자 정보 업데이트
-                val updatedUser = user.copy(blogName = blogName, userName = userName, introduction = introduction)
-                userDB.userDao().update(updatedUser)
-            } else {
-                // 사용자 정보가 없으면 새로 삽입
-                val newUser = User(blogName = blogName, userName = userName, introduction = introduction)
-                userDB.userDao().insert(newUser)
-            }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val newUser = User(blogName = blogName, userName = userName, introduction = introduction)
+            userDB.userDao().insert(newUser)
         }
+        // SharedPreferences에 사용자 이름 저장
+        saveUserNameToPreferences(userName)
     }
 }

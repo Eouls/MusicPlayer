@@ -39,7 +39,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/img_post_5"
+                            android:src="@drawable/img_post_default"
                             android:scaleType="centerCrop"
                             android:alpha="0.8"/>
 
@@ -118,7 +118,7 @@
                         android:layout_height="48dp"
                         android:text="최신순"
                         android:textStyle="bold"
-                        android:textSize="20dp"
+                        android:textSize="15dp"
                         android:textColor="@color/black"
                         android:layout_marginLeft="20dp"
                         android:gravity="center"

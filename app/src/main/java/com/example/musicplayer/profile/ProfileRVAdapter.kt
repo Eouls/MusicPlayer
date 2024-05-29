@@ -23,6 +23,10 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
         mItemClickListener = itemClickListener
     }
 
+    // 특정 위치의 post 반환
+    fun getPost(position: Int): Post {
+        return posts[position]
+    }
 
     // 저장된 글 삭제
     @SuppressLint("NotifyDataSetChanged")
