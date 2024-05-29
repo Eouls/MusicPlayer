@@ -9,7 +9,6 @@ import androidx.room.RoomDatabase
 abstract class AlbumDatabase: RoomDatabase() {
     abstract fun albumDao(): AlbumDao
 
-
     companion object {
         private var instance: AlbumDatabase? = null
 
@@ -20,7 +19,7 @@ abstract class AlbumDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         AlbumDatabase::class.java,
-                        "post-database" // 다른 데이터 베이스랑 이름 겹치면 꼬임
+                        "album-database" // 다른 데이터 베이스랑 이름 겹치면 꼬임
                     ).allowMainThreadQueries().build()
                 }
             }

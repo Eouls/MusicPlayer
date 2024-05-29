@@ -9,7 +9,7 @@ class LockerVPAdapter(fragmentActivity: LockerFragment): FragmentStateAdapter(fr
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> LikedSongFragment()
-            else -> LikedBlogFragment()
+            else -> LikedAlbumFragment()
         }
     }
 }

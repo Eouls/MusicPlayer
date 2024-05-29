@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class LockerFragment: Fragment() {
     lateinit var binding: FragmentLockerBinding
-    private val tabList = arrayListOf("좋아요 한 곡", "좋아요 한 블로그")
+    private val tabList = arrayListOf("좋아요 한 곡", "좋아요 한 앨범")
 
     override fun onCreateView(
         inflater: LayoutInflater,
