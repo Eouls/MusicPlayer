@@ -44,12 +44,12 @@ class BlogFragment: Fragment() {
         )
 
 
-        // post 삭제 클릭 이벤트
+        /*// post 삭제 클릭 이벤트
         blogRVAdapter.setMyItemClickListener(object : BlogRVAdapter.MyItemClickListener {
             override fun onRemoveItem(position: Int) {
                 // blogRVAdapter.removeItem(position)
             }
-        })
+        })*/
 
         // item 구분선
         val dividerItemDecoration = DividerItemDecoration(binding.blogPostRv.context, LinearLayoutManager.VERTICAL)

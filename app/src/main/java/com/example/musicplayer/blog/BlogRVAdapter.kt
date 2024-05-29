@@ -44,10 +44,10 @@ class BlogRVAdapter (private var posts: ArrayList<Post>) :
 
     override fun onBindViewHolder(holder: BlogRVAdapter.ViewHolder, position: Int) {
         holder.bind(posts[position])
-        holder.binding.itemPostMoreIv.setOnClickListener {
+        /*holder.binding.itemPostMoreIv.setOnClickListener {
             mItemClickListener.onRemoveItem(posts[position].id)
             removeItem(position)
-        }
+        }*/
     }
 
     // 데이터 세트 크기 함수
