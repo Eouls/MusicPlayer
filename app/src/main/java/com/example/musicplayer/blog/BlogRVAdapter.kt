@@ -1,5 +1,6 @@
 package com.example.musicplayer.blog
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class BlogRVAdapter (private var posts: ArrayList<Post>) :
 
 
     // 저장된 글 삭제
+    @SuppressLint("NotifyDataSetChanged")
     fun removeItem(position: Int) {
         posts.removeAt(position)
         notifyDataSetChanged()
@@ -43,7 +45,7 @@ class BlogRVAdapter (private var posts: ArrayList<Post>) :
     override fun onBindViewHolder(holder: BlogRVAdapter.ViewHolder, position: Int) {
         holder.bind(posts[position])
         holder.binding.itemPostMoreIv.setOnClickListener {
-            mItemClickListener.onRemoveItem(position)
+            mItemClickListener.onRemoveItem(posts[position].id)
             removeItem(position)
         }
     }
@@ -54,7 +56,6 @@ class BlogRVAdapter (private var posts: ArrayList<Post>) :
     // 뷰 홀더
     inner class ViewHolder(val binding: ItemBlogPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            // binding.itemPostImgIv.setImageResource(post.postImg!!)
             binding.itemPostTitleTv.text = post.title
             binding.itemPostUserNameTv.text = post.name
             binding.itemPostContentTv.text = post.content

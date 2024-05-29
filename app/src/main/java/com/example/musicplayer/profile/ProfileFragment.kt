@@ -24,9 +24,9 @@ import kotlinx.coroutines.withContext
 
 class ProfileFragment: Fragment() {
     lateinit var binding: FragmentProfileBinding
-    private lateinit var postDatabase: PostDatabase
+    private lateinit var postDB: PostDatabase
     private lateinit var profileRVAdapter: ProfileRVAdapter
-    private lateinit var userDatabase: UserDatabase
+    private lateinit var userDB: UserDatabase
     private val EDIT_PROFILE_REQUEST_CODE = 123
 
     override fun onCreateView(
@@ -36,24 +36,25 @@ class ProfileFragment: Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        // UserDatabase 초기화
-        userDatabase = UserDatabase.getInstance(requireContext())!!
+        // userDB 초기화
+        userDB = UserDatabase.getInstance(requireContext())!!
 
+        // userData 로그캣 출력
         GlobalScope.launch(Dispatchers.IO) {
-            val allUsers = userDatabase.userDao().getUsers()
+            val allUsers = userDB.userDao().getUsers()
             allUsers.forEach { user ->
                 Log.d("UserData", "ID: ${user.id}, Blog Name: ${user.blogName}, User Name: ${user.userName}, Introduction: ${user.introduction}")
             }
         }
 
-        // 스크롤 시 툴바 세팅
+        // 스크롤 시 툴바 위로
         val activity = activity as? AppCompatActivity
         activity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         activity?.supportActionBar?.setDisplayShowHomeEnabled(true)
 
         // 데이터베이스에서 게시물 데이터 가져오기
-        postDatabase = PostDatabase.getInstance(requireContext()) as PostDatabase
-        if (postDatabase == null) {
+        postDB = PostDatabase.getInstance(requireContext()) as PostDatabase
+        if (postDB == null) {
             // 데이터베이스가 null인 경우, onCreateView 함수를 종료하고 null을 반환
             return super.onCreateView(inflater, container, savedInstanceState)
         }
@@ -62,7 +63,7 @@ class ProfileFragment: Fragment() {
         profileRVAdapter = ProfileRVAdapter(ArrayList<Post>()) // 빈 리스트로 초기화
         binding.profilePostRv.adapter = profileRVAdapter
         binding.profilePostRv.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
         binding.profilePostRv.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
@@ -103,7 +104,7 @@ class ProfileFragment: Fragment() {
         // post 삭제 클릭 이벤트
         profileRVAdapter.setMyItemClickListener(object : ProfileRVAdapter.MyItemClickListener {
             override fun onRemoveItem(position: Int) {
-                profileRVAdapter.removeItem(position)
+                // profileRVAdapter.removeItem(position)
             }
         })
 
@@ -119,7 +120,7 @@ class ProfileFragment: Fragment() {
 
     private fun loadPostsFromDatabase() {
         GlobalScope.launch(Dispatchers.IO) {
-            val postsFromDatabase = postDatabase.postDao().getPosts()
+            val postsFromDatabase = postDB.postDao().getPosts()
             withContext(Dispatchers.Main) {
                 profileRVAdapter.setData(postsFromDatabase)
             }
@@ -128,7 +129,7 @@ class ProfileFragment: Fragment() {
 
     private fun loadUserData() {
         GlobalScope.launch(Dispatchers.IO) {
-            val user = userDatabase.userDao().getUsers().firstOrNull()
+            val user = userDB.userDao().getUsers().firstOrNull()
             withContext(Dispatchers.Main) {
                 user?.let {
                     binding.blogName.text = it.blogName
@@ -169,15 +170,15 @@ class ProfileFragment: Fragment() {
     }
     private fun updateUserInDatabase(blogName: String, userName: String, introduction: String) {
         GlobalScope.launch(Dispatchers.IO) {
-            val user = userDatabase.userDao().getUsers().firstOrNull()
+            val user = userDB.userDao().getUsers().firstOrNull()
             if (user != null) {
                 // 사용자 정보 업데이트
                 val updatedUser = user.copy(blogName = blogName, userName = userName, introduction = introduction)
-                userDatabase.userDao().update(updatedUser)
+                userDB.userDao().update(updatedUser)
             } else {
                 // 사용자 정보가 없으면 새로 삽입
                 val newUser = User(blogName = blogName, userName = userName, introduction = introduction)
-                userDatabase.userDao().insert(newUser)
+                userDB.userDao().insert(newUser)
             }
         }
     }

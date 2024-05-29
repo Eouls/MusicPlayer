@@ -1,5 +1,6 @@
 package com.example.musicplayer.profile
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
 
 
     // 저장된 글 삭제
+    @SuppressLint("NotifyDataSetChanged")
     fun removeItem(position: Int) {
         posts.removeAt(position)
         notifyDataSetChanged()
@@ -43,7 +45,7 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
     override fun onBindViewHolder(holder: ProfileRVAdapter.ViewHolder, position: Int) {
         holder.bind(posts[position])
         holder.binding.itemMypostMoreIv.setOnClickListener {
-            mItemClickListener.onRemoveItem(position)
+            mItemClickListener.onRemoveItem(posts[position].id)
             removeItem(position)
         }
     }
@@ -54,7 +56,6 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
     // 뷰 홀더
     inner class ViewHolder(val binding: ItemProfilePostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            // binding.itemMypostImgIv.setImageResource(post.postImg!!)
             binding.itemMypostTitleTv.text = post.title
             binding.itemMypostContentTv.text = post.content
             binding.itemMypostDateTv.text = post.date
