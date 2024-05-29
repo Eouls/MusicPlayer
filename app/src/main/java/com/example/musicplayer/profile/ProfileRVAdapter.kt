@@ -65,7 +65,7 @@ class ProfileRVAdapter (private var posts: ArrayList<Post>) :
             binding.itemMypostDateTv.text = post.date
 
             // 이미지 경로를 통해 이미지 설정
-            post.imagePath?.let { imagePath ->
+            post.contentImgPath?.let { imagePath ->
                 Glide.with(binding.itemMypostImgIv.context)
                     .load(imagePath)
                     .into(binding.itemMypostImgIv)

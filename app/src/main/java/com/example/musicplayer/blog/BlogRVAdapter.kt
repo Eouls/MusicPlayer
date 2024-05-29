@@ -11,6 +11,8 @@ import com.example.musicplayer.post.Post
 
 class BlogRVAdapter (private var posts: ArrayList<Post>) :
     RecyclerView.Adapter<BlogRVAdapter.ViewHolder>() {
+    private var userImgPath: String? = null
+
 
     //클릭 인터페이스 정의
     interface MyItemClickListener {
@@ -62,12 +64,21 @@ class BlogRVAdapter (private var posts: ArrayList<Post>) :
             binding.itemPostDateTv.text = post.date
 
             // 이미지 경로를 통해 이미지 설정
-            post.imagePath?.let { imagePath ->
+            post.contentImgPath?.let { imagePath ->
                 Glide.with(binding.itemPostImgIv.context)
                     .load(imagePath)
                     .into(binding.itemPostImgIv)
             } ?: run {
                 binding.itemPostImgIv.setImageResource(R.drawable.img_post_default) // 기본 이미지 설정
+            }
+
+            // 이미지 경로를 통해 이미지 설정
+            post.userImgPath?.let { imagePath ->
+                Glide.with(binding.itemPostProfileIv.context)
+                    .load(imagePath)
+                    .into(binding.itemPostProfileIv)
+            } ?: run {
+                binding.itemPostProfileIv.setImageResource(R.drawable.img_default_profile) // 기본 이미지 설정
             }
         }
     }
@@ -75,5 +86,10 @@ class BlogRVAdapter (private var posts: ArrayList<Post>) :
     fun setData(newPosts: List<Post>) {
         posts = newPosts as ArrayList<Post>
         notifyDataSetChanged()
+    }
+
+    fun setUserProfileImagePath(userImgPath: String?) {
+        this.userImgPath = userImgPath
+        notifyDataSetChanged() // 이미지가 업데이트되었으므로 RecyclerView 갱신
     }
 }

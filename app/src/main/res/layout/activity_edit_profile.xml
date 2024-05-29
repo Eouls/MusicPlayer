@@ -42,21 +42,22 @@
         android:background="@color/black">
 
         <ImageView
+            android:id="@+id/profile_cover_edit_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_post_5"
+            android:alpha="0.9"
             android:scaleType="centerCrop"
-            android:alpha="0.9"/>
+            android:src="@drawable/img_default_cover" />
 
         <ImageView
-            android:id="@+id/profile_cover_edit"
-            android:src="@drawable/btn_edit_img"
+            android:id="@+id/profile_cover_edit_btn"
+            android:src="@drawable/btn_camera_img"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerInParent="true"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture_edit"
+            android:id="@+id/profile_picture_edit_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/img_default_profile"
@@ -69,7 +70,7 @@
             android:id="@+id/profile_picture_edit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@id/profile_picture_edit"
+            android:layout_alignRight="@id/profile_picture_edit_iv"
             android:layout_marginBottom="15dp"
             android:layout_alignParentBottom="true">
 
@@ -79,7 +80,7 @@
                 android:src="@drawable/img_black"/>
 
             <ImageView
-                android:src="@drawable/btn_edit_img"
+                android:src="@drawable/btn_camera_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"/>

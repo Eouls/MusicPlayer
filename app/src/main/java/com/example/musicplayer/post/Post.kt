@@ -10,7 +10,8 @@ data class Post(
         val name : String = "",
         val content : String = "",
         val date : String = "",
-        val imagePath: String? = null
+        val contentImgPath: String? = null,
+        val userImgPath: String? = null
 ){
         @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

@@ -3,6 +3,7 @@ package com.example.musicplayer.profile
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -129,6 +130,8 @@ class ProfileFragment: Fragment() {
                     binding.blogName.text = it.blogName
                     binding.userName.text = it.userName
                     binding.userIntroduction.text = it.introduction
+                    it.coverImgPath?.let { path -> binding.coverImgIv.setImageURI(Uri.parse(path)) }
+                    it.profileImgPath?.let { path -> binding.profileImgIv.setImageURI(Uri.parse(path)) }
                 }
             }
         }
@@ -149,22 +152,30 @@ class ProfileFragment: Fragment() {
             val editedBlogName = data?.getStringExtra("BLOG_NAME")
             val editedUserName = data?.getStringExtra("USER_NAME")
             val editedUserIntroduction = data?.getStringExtra("USER_INTRODUCTION")
+            val coverImgPath = data?.getStringExtra("COVER_IMG_PATH")
+            val profileImgPath = data?.getStringExtra("PROFILE_IMG_PATH")
 
-            // 수정된 프로필 정보를 TextView에 반영
+            // 수정된 프로필 정보를 반영
             binding.blogName.text = editedBlogName
             binding.userName.text = editedUserName
             binding.userIntroduction.text = editedUserIntroduction
+            coverImgPath?.let {
+                binding.coverImgIv.setImageURI(Uri.parse(it))
+            }
+            profileImgPath?.let {
+                binding.profileImgIv.setImageURI(Uri.parse(it))
+            }
 
             // 수정된 사용자 정보를 데이터베이스에 저장
-            updateUserInDatabase(editedBlogName ?: "", editedUserName ?: "", editedUserIntroduction ?: "")
+            updateUserInDatabase(coverImgPath?: "", profileImgPath?: "", editedBlogName ?: "", editedUserName ?: "", editedUserIntroduction ?: "")
 
             // 사용자 정보 업데이트
             loadUserData()
         }
     }
-    private fun updateUserInDatabase(blogName: String, userName: String, introduction: String) {
+    private fun updateUserInDatabase(coverImgPath: String, profileImgPath: String, blogName: String, userName: String, introduction: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val newUser = User(blogName = blogName, userName = userName, introduction = introduction)
+            val newUser = User(coverImgPath = coverImgPath, profileImgPath = profileImgPath, blogName = blogName, userName = userName, introduction = introduction)
             userDB.userDao().insert(newUser)
         }
         // SharedPreferences에 사용자 이름 저장
