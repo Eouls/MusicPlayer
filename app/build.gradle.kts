@@ -12,6 +12,10 @@ android {
         enable = true
     }
 
+    dataBinding {
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.musicplayer"
         minSdk = 24
@@ -57,6 +61,9 @@ dependencies {
     // image loading
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    // SplashTheme
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
     // Room DB
     val room_version = "2.6.1"
