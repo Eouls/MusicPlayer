@@ -42,7 +42,7 @@
                             android:layout_height="match_parent"
                             android:alpha="0.8"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img_post_default" />
+                            android:src="@drawable/img_default_cover" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/profile_img_iv"
